@@ -37,8 +37,8 @@
 										<li><a href="#">Lifestyle</a></li>
 									</ul>
 									<div class="user-details row">
-										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">Mark wiens</a> <span class="lnr lnr-user"></span></p>
-										<p class="date col-lg-12 col-md-12 col-6"><a href="#">12 Dec, 2017</a> <span class="lnr lnr-calendar-full"></span></p>
+										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{post.author.get_full_name}}</a> <span class="lnr lnr-user"></span></p>
+										<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}} Views</a> <span class="lnr lnr-eye"></span></p>
 										<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>
 										<ul class="social-links col-lg-12 col-md-12 col-6">
@@ -61,30 +61,32 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
+											<a href="#"><img class="img-fluid" src="{{previous_post.image.url}}" alt=""></a>
 										</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
 										</div>
-										{% if next_post %}
+										
 										<div class="detials">
 											<p>Prev Post</p>
-											<a href="{% url 'blog:single'  previous_post.id %}"><h4>{{post.title}}</h4></a>
+											
+											<a href="#"><h4>{{previous_post.title}}</h4></a>
 										</div>
-										{% end for %}
+									
 									</div>
 									<div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-										{% if previous_post %}
+										
 										<div class="detials">
 											<p>Next Post</p>
-											<a href="{% url 'blog:single'  next_post.id %}"><h4>{{post.title}}</h4></a>
+											
+											<a href="#"><h4>{{next_post.title}}</h4></a>
 										</div>
-										{% endif %}
+										
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
 										</div>
 										<div class="thumb">
-											<a href="#"><img class="img-fluid" src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+											<a href="#"><img class="img-fluid" src="{{next_post.image.url}}" alt=""></a>
 										</div>										
 									</div>									
 								</div>
