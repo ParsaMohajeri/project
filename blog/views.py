@@ -14,12 +14,12 @@ def blog_single(request,pid):
     post = get_object_or_404(Post,pk=pid,status=1,published_date__lte=timezone.now())
     post.counted_views += 1
     post.save()
-    previous_post = Post.objects.filter(id__lt=pid).order_by('-id').first()
+    previous_post = Post.objects.filter(id__lt=pid,status=1,published_date__lte=timezone.now()).order_by('-id').first()
     # if previous_post:
     #     return True
-    # if next_post:
+    # if next_post:6
     #     return True
-    next_post = Post.objects.filter(id__gt=pid).order_by('id').first()
+    next_post = Post.objects.filter(id__gt=pid,status=1,published_date__lte=timezone.now()).order_by('id').first()
     context={'post':post,
              'previous_post': previous_post,
              'next_post': next_post}
