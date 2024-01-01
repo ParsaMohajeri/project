@@ -24,10 +24,10 @@ def blog_single(request,pid):
              'previous_post': previous_post,
              'next_post': next_post}
     return render(request,'blog/blog-single.html',context)
-def test(request,pid):
+def test(request):
     # post=Post.objects.get(id=pid)
     # posts=Post.objects.all()
     # posts=Post.objects.filter(status=0)
-    post = get_object_or_404(Post,pk=pid)
-    context={'post':post}
-    return render(request,'test.html',context)
+    # post = get_object_or_404(Post,pk=pid)
+    # context={'post':post}
+    return render(request,'test.html')
