@@ -10,7 +10,6 @@
 <body>
     <form action="{% url 'website:test' %}" method="post">
         {% csrf_token %}
-
         {{form}}
         
         <button type= 'submit'>submit </button>
