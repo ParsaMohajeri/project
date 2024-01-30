@@ -13,7 +13,7 @@ def contact_view(request):
     if request.method=='POST':
         form=ContactForm(request.POST)
         if form.is_valid():
-            form.save
+            form.save()
     form=ContactForm()
     return render(request,'website/contact.html',{'form':form})
 

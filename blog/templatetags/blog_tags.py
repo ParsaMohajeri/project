@@ -9,9 +9,9 @@ register = template.Library()
 
 @register.inclusion_tag('latest_posts.html')
 def latest_posts():
-    posts = Post.objects.order_by('-published_date')[:6]
+    posts = Post.objects.filter(status=1).order_by('-published_date')[:6]
     return {'posts': posts}
-register =template.Library()
+
 
 @register.simple_tag(name='totalposts')
 def function():
@@ -74,3 +74,7 @@ def post_img(post):
 def hello ():
     return 'hello'
 
+@register.inclusion_tag('website/popular-posts.html')
+def latest_posts_index():
+    posts = Post.objects.filter(status=1).order_by('-published_date')[:6]
+    return {'posts': posts}
