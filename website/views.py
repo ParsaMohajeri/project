@@ -16,10 +16,8 @@ def contact_view(request):
     if request.method=='POST':
         form=ContactForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['name'] == 'parsa':
-                form.cleaned_data['name'] ='unknown'
-                form.save()
-                messages.add_message(request,messages.SUCCESS,"your ticket submited successfully")
+            form.save()
+            messages.add_message(request,messages.SUCCESS,"your ticket submited successfully")
         else:
             messages.add_message(request,messages.ERROR,"your ticket didnt submited")
     form=ContactForm()
