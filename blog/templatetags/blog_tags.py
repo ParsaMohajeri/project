@@ -76,5 +76,5 @@ def hello ():
 
 @register.inclusion_tag('website/popular-posts.html')
 def latest_posts_index():
-    posts = Post.objects.filter(status=1).order_by('-published_date')[:6]
+    posts = Post.objects.filter(status=1,published_date__lte=timezone.now()).order_by('-published_date')[:6]
     return {'posts': posts}

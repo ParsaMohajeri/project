@@ -443,15 +443,18 @@
 			<div class="menu-content pb-60 col-lg-9">
 				<div class="title text-center">
 					<h1 class="mb-10">Latest from Our Blog</h1>
-					<p>With the exception of Nietzsche, no other madman has contributed so much to human sanity as
-						has.
+					<p>With the exception of Nietzsche, no other madman has contributed so much to human sanity as has.
 					</p>
 				</div>
 			</div>
 		</div>
-		{% latest_posts_index %}
+		<div class="row">
+			<div class="active-recent-blog-carusel">
+				{% latest_posts_index %}
+			</div>
+		</div>
 	</div>
 </section>
 <!-- End recent-blog Area -->
 
-{% endblock %} 
+{% endblock %}
