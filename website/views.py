@@ -11,12 +11,17 @@ def index_view(request):
 def about_view(request):
     return render(request,'website/about.html')
 
-
+fruits={'name':'unknown'}
 def contact_view(request):
     if request.method=='POST':
         form=ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            model_instance = Contact.objects.last()
+            # update the model fields
+            for key, value in fruits.items():
+                setattr(model_instance, key, value)
+            model_instance.save()
+            # form.save()
             messages.add_message(request,messages.SUCCESS,"your ticket submited successfully")
         else:
             messages.add_message(request,messages.ERROR,"your ticket didnt submited")
