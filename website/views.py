@@ -18,13 +18,11 @@ def contact_view(request):
     if request.method=='POST':
         form=ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            Contact.objects.create(name=name)
-            names_name={'name':'unknown'}
-            model_instance = Contact.objects.last()
-            for key, value in names_name.items():
-                setattr(model_instance, key, value)
-            model_instance.save()
+            f=ContactForm(request.POST)
+            new_name=f.save(commit=False)
+            new_name.name='unknown'
+            new_name.save()
+            f.save_m2m()
             messages.add_message(request,messages.SUCCESS,"your ticket submited successfully")
         else:
             messages.add_message(request,messages.ERROR,"your ticket didnt submited")
