@@ -1,12 +1,15 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from blog.models import Post
 from django.utils import timezone
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from blog.models import Comment
 from blog.forms import CommentForm
 from django.contrib import messages
-
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+# from django.contrib.auth.decorators import login_required
 # Create your views here.
+# @login_required
 def blog_view(request,**kwargs):
     posts=Post.objects.filter(status=1,published_date__lte=timezone.now())
     if kwargs.get('cat_name')!=None:
@@ -44,10 +47,13 @@ def blog_single(request,pid):
     post.save()
     previous_post = Post.objects.filter(id__lt=pid,status=1,published_date__lte=timezone.now()).order_by('-id').first()
     next_post = Post.objects.filter(id__gt=pid,status=1,published_date__lte=timezone.now()).order_by('id').first()
-    comments=Comment.objects.filter(post=post.id,approved=True).order_by('-created_date')
-    form=CommentForm()
-    context={'post':post,'previous_post': previous_post,'next_post': next_post,'comments':comments,'form':form}
-    return render(request,'blog/blog-single.html',context)
+    if not post.login_require:
+        comments=Comment.objects.filter(post=post.id,approved=True).order_by('-created_date')
+        form=CommentForm()
+        context={'post':post,'previous_post': previous_post,'next_post': next_post,'comments':comments,'form':form}
+        return render(request,'blog/blog-single.html',context)
+    else:
+        return HttpResponseRedirect(reverse('accounts:login'))
 def test(request):
     # post=Post.objects.get(id=pid)
     # posts=Post.objects.all()
