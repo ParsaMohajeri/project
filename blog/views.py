@@ -3,6 +3,8 @@ from blog.models import Post
 from django.utils import timezone
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from blog.models import Comment
+from blog.forms import CommentForm
+from django.contrib import messages
 
 # Create your views here.
 def blog_view(request,**kwargs):
@@ -15,7 +17,7 @@ def blog_view(request,**kwargs):
         posts=posts.filter(tags__name__in=[kwargs['tag_name']])
         
 
-    posts=Paginator(posts,2)
+    posts=Paginator(posts,4)
     try:
         page_number=request.GET.get('page')
         posts=posts.get_page(page_number)
@@ -30,21 +32,21 @@ def blog_view(request,**kwargs):
     context={'posts':posts}
     return render(request,'blog/blog-home.html',context)
 def blog_single(request,pid):
+    if request.method=='POST':
+        form =CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request,messages.SUCCESS,"your comment submited")
+        else:
+            messages.add_message(request,messages.ERROR,"your comment didnt submited")  
     post = get_object_or_404(Post,pk=pid,status=1,published_date__lte=timezone.now())
     post.counted_views += 1
     post.save()
     previous_post = Post.objects.filter(id__lt=pid,status=1,published_date__lte=timezone.now()).order_by('-id').first()
-    # if previous_post:
-    #     return True
-    # if next_post:6
-    #     return True
     next_post = Post.objects.filter(id__gt=pid,status=1,published_date__lte=timezone.now()).order_by('id').first()
     comments=Comment.objects.filter(post=post.id,approved=True).order_by('-created_date')
-    context={'post':post,
-             'previous_post': previous_post,
-             'next_post': next_post,
-             'comments':comments
-             }
+    form=CommentForm()
+    context={'post':post,'previous_post': previous_post,'next_post': next_post,'comments':comments,'form':form}
     return render(request,'blog/blog-single.html',context)
 def test(request):
     # post=Post.objects.get(id=pid)
