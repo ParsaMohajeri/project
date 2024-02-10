@@ -1,75 +1,96 @@
-{%load static%}
-<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sign up</title>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
+
 <body>
-<section class="bg-light py-3 py-md-5 py-xl-8">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-          <div class="mb-5">
-            <div class="text-center mb-4">
-              <a href="#!">
-              </a>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
             </div>
-            <h4 class="text-center mb-4">Welcome to page sign up</h4>
-            <div class="text-center">
-            </div>
-          </div>
-          <div class="card border border-light-subtle rounded-4">
-            <div class="card-body p-3 p-md-4 p-xl-5">
-              <form method="post" action="{%url 'accounts:signup'%}">
-                {%csrf_token%}
-                <div class="row gy-3 overflow-hidden">
-                  <div class="col-12">
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" name="username" placeholder="Username" required autofocus >
-                      <label for="username" class="form-label">Username</label>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-floating mb-3">
-                      <input type="email" class="form-control" name="email" placeholder="Email" required autofocus >
-                      <label for="email" class="form-label">Email</label>
-                    </div>
-                  <div class="col-12">
-                    <div class="form-floating mb-3">
-                      <input type="password" class="form-control" name="password1" value="" placeholder="Password" required>
-                      <label for="password" class="form-label">Password</label>
-                    </div>
-                   <div class="col-12">
-                        <div class="form-floating mb-3">
-                          <input type="password" class="form-control" name="password2" value="" placeholder="Confirm Password" required>
-                          <label for="password" class="form-label">Confirm Password</label>
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="fa fa-user-o"></span>
                         </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
-                      <label class="form-check-label text-secondary" for="remember_me">
-                        Keep me logged in
-                      </label>
+                        <h3 class="text-center mb-4">Sign Up</h3>
+                        <form method="post" action="{% url 'accounts:signup' %}" class="login-form">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <input type="text" name="first_name" class="form-control rounded-left"
+                                    placeholder="Fisrt Name" required> 
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="last_name" class="form-control rounded-left"
+                                    placeholder="Last Name" required> 
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="username" class="form-control rounded-left"
+                                    placeholder="Username" required> 
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control rounded-left"
+                                    placeholder="Email Address" required> 
+                            </div>
+
+                            <div class="form-group d-flex">
+                                <input type="password" name="password" class="form-control rounded-left"
+                                    placeholder="Password" required> 
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="password" name="confirm" class="form-control rounded-left"
+                                    placeholder="Confirm Password" required> 
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit"
+                                    class="form-control btn btn-primary rounded submit px-3">sign-up</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="{% url 'accounts:reset' %}">Forgot Password</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="d-grid">
-                      <button class="btn btn-primary btn-lg" type="submit">sign up</button>
-                    </div>
-                  </div>
                 </div>
-              </form>
             </div>
-          </div>
-          <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-4">
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
 </body>
+
 </html>

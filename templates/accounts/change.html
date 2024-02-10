@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+<body>
+    <div>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div>
+                <label>Your new password</label>
+                <input type="password" name="password">
+            </div>
+            <div>
+                <label>Confirm new password</label>
+                <input type="password" name="password2">
+            </div>
+            <div>
+                <label>Email Confirm Code</label>
+                <input type="text" name="confirm">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block submit-btn">Confirm</button>
+        </form>
+    </div>
+</body>
+
+</html>
