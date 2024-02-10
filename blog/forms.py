@@ -7,5 +7,5 @@ from blog.models import Comment
 class CommentForm(forms.ModelForm):
     # captcha = CaptchaField()
     class Meta :
-        model=Comment   
+        model=Comment
         fields=['post','name','email','subject','message']
