@@ -60,7 +60,7 @@ def signup_view(request):
         return render(request, 'accounts/signup.html',{'form':form})
     else:
         return redirect('/')
-def reset_view(request):
+def reset(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
             user_email = request.POST["email"]

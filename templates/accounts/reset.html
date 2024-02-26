@@ -20,7 +20,7 @@
                 <p class="mb-2">Enter your registered email ID to reset the password
                 </p>
               </div>
-              <form method="post" action="{% url 'accounts:reset' %}">
+              <form method="post" action="{% url 'password_reset' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
