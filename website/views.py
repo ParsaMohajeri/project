@@ -48,3 +48,10 @@ def test_view(request):
     form=ContactForm()
     return render(request,'test.html',{'form':form})
 
+
+def coming_soon_view(request):
+    return render(request,'website/coming_soon.html')
+
+
+def handler404(request, *args, **kwargs):
+    return HttpResponseRedirect('coming_soon')
