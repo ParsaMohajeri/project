@@ -54,4 +54,4 @@ def coming_soon_view(request):
 
 
 def handler404(request, *args, **kwargs):
-    return HttpResponseRedirect('coming_soon')
+    return HttpResponseRedirect('/coming_soon')
