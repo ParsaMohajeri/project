@@ -25,7 +25,9 @@ import debug_toolbar
 from website import views
 from django.http.response import HttpResponseRedirect
 # from django.contrib.auth.urls
-
+from django.urls import re_path
+from django.conf import settings
+from django.views.generic.base import TemplateView
 
 sitemaps = {
     "static": StaticViewSitemap,
@@ -42,9 +44,12 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('captcha/', include('captcha.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
+    re_path(r'^', views.maintenance, name='maintenance')
+    # urlpatterns.insert(0, re_path(r'^', TemplateView.as_view(template_name='../path/maintenance.html'), name='maintenance'))
 
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = 'website.views.handler404'
+
