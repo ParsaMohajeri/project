@@ -52,9 +52,5 @@ def test_view(request):
 def coming_soon_view(request):
     return render(request,'website/coming_soon.html')
 
-def maintenance(request):
-    return HttpResponseRedirect(request,'website/coming_soon.html')
-
-
 def handler404(request, *args, **kwargs):
     return HttpResponseRedirect('/coming_soon')

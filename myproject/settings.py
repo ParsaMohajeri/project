@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'robots',
     'debug_toolbar',
     'taggit',
-    'maintenancemode',
     'website.apps.WebsiteConfig',
     'blog',
     'accounts'
@@ -92,7 +91,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'maintenancemode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -181,9 +179,3 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 MAINTENANCE_MODE = True
-
-MAINTENANCE_IGNORE_URLS = (
-    r'^/docs/.*',
-    r'^/contact'
-)
-
