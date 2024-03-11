@@ -14,12 +14,6 @@ ALLOWED_HOSTS = ['mahsamohajeri.ir','www.mahsamohajeri.ir','127.0.0.1']
 
 SITE_ID=4
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 STATIC_ROOT= BASE_DIR / 'static'
 MEDIA_ROOT= BASE_DIR / 'media'
