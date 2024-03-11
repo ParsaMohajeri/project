@@ -8,11 +8,11 @@ from myproject.settings import *
 SECRET_KEY = 'django-insecure-z9l!_k*xde21djo@4u54w63hj1+q#v06+(#tyhm!&w26p!7h5_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['mahsamohajeri.ir','www.mahsamohajeri.ir','127.0.0.1']
 
-SITE_ID=2
+SITE_ID=4
 
 DATABASES = {
     'default': {
