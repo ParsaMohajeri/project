@@ -6,3 +6,6 @@ django-summernote
 django-taggit
 django-debug-toolbar
 mysqlclient
+compressor
+cssmin
+jsmin
